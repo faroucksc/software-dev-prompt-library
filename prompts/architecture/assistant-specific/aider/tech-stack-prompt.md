@@ -202,7 +202,7 @@ All versions are exact (e.g., "1.2.3" not "^1.2.3") to ensure:
 - Reproducible builds
 ```
 
-Then, based on core technology, generate appropriate dependency file(s):
+Then, based on core technology, generate appropriate dependency file(s). Below are a few examples based on some currently popular technologies:
 
 For Node.js/JavaScript/TypeScript projects:
 ```json
@@ -213,6 +213,41 @@ For Node.js/JavaScript/TypeScript projects:
   "dependencies": {
     "[package-name]": "[exact-version]",
     "[package-name]": "[exact-version]"
+  }
+}
+```
+
+For Deno Fresh projects:
+```
+{
+  "imports": {
+    "$fresh/": "https://deno.land/x/fresh@1.7.3/",
+    "preact": "https://esm.sh/preact@10.19.2",
+    "preact/": "https://esm.sh/preact@10.19.2/",
+    "preact-render-to-string": "https://esm.sh/*preact-render-to-string@6.2.2",
+    "@preact/signals": "https://esm.sh/*@preact/signals@1.2.1",
+    "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.0",
+    "zod": "https://esm.sh/zod@3.21.4",
+    "tailwindcss": "https://esm.sh/tailwindcss@3.3.4",
+    "daisyui": "https://esm.sh/daisyui@3.9.4",
+    "@firebase/app": "https://esm.sh/@firebase/app@0.10.15",
+    "@firebase/auth": "https://esm.sh/@firebase/auth@1.8.0",
+    "@firebase/firestore": "https://esm.sh/@firebase/firestore@4.7.4"
+  },
+  "tasks": {
+    "start": "deno run -A --no-check --watch=static/,routes/ dev.ts",
+    "build": "deno run -A --no-check dev.ts build",
+    "preview": "deno run -A --no-check main.ts"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact"
+  },
+  "permissions": {
+    "allow-read": ["static/", "routes/"],
+    "allow-net": ["deno.land", "esm.sh", "firebase.googleapis.com"],
+    "allow-write": [],
+    "allow-env": true
   }
 }
 ```
